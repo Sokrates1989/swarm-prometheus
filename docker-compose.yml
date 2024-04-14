@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.51.2
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+    ports:
+      - "9090:9090"
+    volumes:
+      - ${DATA_ROOT}/prometheus_data:/prometheus
+      - ${DATA_ROOT}/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    networks:
+      - prometheus_net
+
+networks:
+  prometheus_net:
+
+volumes:
+  prometheus_data:
