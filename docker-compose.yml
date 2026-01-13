@@ -20,6 +20,4 @@ services:
 
 networks:
   prometheus_net:
-
-volumes:
-  prometheus_data:
+  
